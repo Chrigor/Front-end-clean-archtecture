@@ -1,6 +1,6 @@
 "use client";
 import { User } from "@/@core/domain/entities/user";
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 type UserContextProps = {
   user: User | null;
@@ -19,4 +19,8 @@ export function UserProvider({ children }: PropsWithChildren) {
       {children}
     </UserContext.Provider>
   );
+}
+
+export function useUser() {
+  return useContext(UserContext);
 }

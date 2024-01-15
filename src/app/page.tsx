@@ -1,14 +1,17 @@
 "use client";
 import "@/app/globals.css";
 
-import { FormEvent, useContext } from "react";
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+
 import { Input } from "@/app/components/Input";
 
 import { makeUseCaseSignIn } from "@/@core/main/make-use-case-sign-in";
-import { UserContext } from "./context/user";
+import { useUser } from "@/app/context/user";
 
 export default function Home() {
-  const { setUser, user } = useContext(UserContext);
+  const { setUser, user } = useUser();
+  const routes = useRouter();
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -20,6 +23,8 @@ export default function Home() {
     const useCase = makeUseCaseSignIn();
     const user = await useCase.execute(userName, password);
     setUser(user);
+
+    routes.push("/home");
   };
 
   return (
