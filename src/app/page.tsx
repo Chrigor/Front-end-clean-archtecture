@@ -1,14 +1,14 @@
 "use client";
 import "@/app/globals.css";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext } from "react";
 import { Input } from "@/app/components/Input";
-import { User } from "@/@core/domain/entities/user";
 
 import { makeUseCaseSignIn } from "@/@core/main/make-use-case-sign-in";
+import { UserContext } from "./context/user";
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
+  const { setUser, user } = useContext(UserContext);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
